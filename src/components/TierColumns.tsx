@@ -239,13 +239,19 @@ const skin =
 
                           return (
                             <motion.div
-                              key={i}
-                              whileHover={{
-                                scale: 1.02,
-                                x: 4,
-                              }}
-                              className="group flex items-center justify-between rounded-2xl px-3 py-3 hover:bg-white/[0.03] transition-all duration-200 border border-transparent hover:border-white/5"
-                            >
+  key={i}
+  whileHover={{
+    scale: 1.02,
+    x: 4,
+  }}
+  onClick={() =>
+    setSelectedPlayer({
+      ...player,
+      rank: i + 1,
+    })
+  }
+  className="group flex items-center justify-between rounded-2xl px-3 py-3 hover:bg-white/[0.03] transition-all duration-200 border border-transparent hover:border-white/5 cursor-pointer"
+>
 
                               {/* LEFT */}
                               <div className="flex items-center gap-3 min-w-0">
@@ -336,6 +342,16 @@ ${
         </div>
 
       </div>
+
+      {/* PLAYER MODAL */}
+{selectedPlayer && (
+  <PlayerModal
+    player={selectedPlayer}
+    onClose={() =>
+      setSelectedPlayer(null)
+    }
+  />
+)}
 
     </section>
   );
