@@ -244,22 +244,22 @@ const skin =
     scale: 1.02,
     x: 4,
   }}
-  onClick={() => {
+onClick={() => {
+  const tierPoints: any = {
+    HT1: 60,
+    LT1: 45,
+    HT2: 30,
+    LT2: 20,
+    HT3: 10,
+    LT3: 6,
+    HT4: 4,
+    LT4: 3,
+    HT5: 2,
+    LT5: 1,
+  };
+
   const sortedPlayers = [...players]
     .map((p) => {
-      const tierPoints: any = {
-        HT1: 60,
-        LT1: 45,
-        HT2: 30,
-        LT2: 20,
-        HT3: 10,
-        LT3: 6,
-        HT4: 4,
-        LT4: 3,
-        HT5: 2,
-        LT5: 1,
-      };
-
       const points = Object.values(
         p.tiers || {}
       ).reduce(
@@ -269,7 +269,9 @@ const skin =
         ) =>
           total +
           (tierPoints[
-            String(tier).trim()
+            String(tier)
+              .trim()
+              .toUpperCase()
           ] || 0),
         0
       );
@@ -287,21 +289,20 @@ const skin =
   const realRank =
     sortedPlayers.findIndex(
       (p) =>
-        p.username ===
-        player.username
+        p._id === player._id
     ) + 1;
 
-  const playerPoints =
+  const fullPlayer =
     sortedPlayers.find(
       (p) =>
-        p.username ===
-        player.username
-    )?.points || 0;
+        p._id === player._id
+    );
 
   setSelectedPlayer({
     ...player,
     rank: realRank,
-    points: playerPoints,
+    points:
+      fullPlayer?.points || 0,
   });
 }}
   className="group flex items-center justify-between rounded-2xl px-3 py-3 hover:bg-white/[0.03] transition-all duration-200 border border-transparent hover:border-white/5 cursor-pointer"
@@ -318,14 +319,14 @@ const skin =
   <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/10 via-red-500/10 to-transparent blur-3xl" />
 
   {/* SKIN */}
-  <img
-  src={`https://visage.surgeplay.com/full/512/${skin}`}
+<img
+  src={`https://mc-heads.net/body/${username}/right`}
   alt={username}
   onError={(e) => {
     (
       e.currentTarget as HTMLImageElement
     ).src =
-      "https://visage.surgeplay.com/full/512/Steve";
+      "https://mc-heads.net/body/Steve/right";
   }}
   className="
 relative
@@ -333,8 +334,8 @@ z-10
 w-full
 h-full
 object-contain
-scale-[1.6]
-translate-y-5
+scale-[2.3]
+translate-y-6
 "
 />
 
