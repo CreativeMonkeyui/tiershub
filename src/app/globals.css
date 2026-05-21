@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050506;
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255,0,0,0.10), transparent 25%),
+    radial-gradient(circle at top right, rgba(255,215,0,0.08), transparent 25%),
+    radial-gradient(circle at bottom, rgba(255,0,0,0.08), transparent 35%),
+    #050506;
+
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* MAIN CARD */
+.glass {
+  background: rgba(10, 12, 18, 0.75);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* PREMIUM BORDER */
+.premium-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,215,0,.5),
+      rgba(255,0,0,.15),
+      rgba(255,215,0,.25)
+    );
+
+  border-radius: inherit;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* GOLD GLOW */
+.gold-glow {
+  box-shadow:
+    0 0 20px rgba(255,215,0,.18),
+    0 0 60px rgba(255,215,0,.08);
+}
+
+/* RED GLOW */
+.red-glow {
+  box-shadow:
+    0 0 20px rgba(255,0,0,.18),
+    0 0 50px rgba(255,0,0,.08);
+}
+
+/* TOP PLAYER ROWS */
+.top1 {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,215,0,.10),
+      transparent 45%
+    );
+}
+
+.top2 {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(180,180,180,.08),
+      transparent 45%
+    );
+}
+
+.top3 {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(205,127,50,.10),
+      transparent 45%
+    );
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07090d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1b2230;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2b3447;
+}
+.modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.25);
+  border-radius: 999px;
 }
