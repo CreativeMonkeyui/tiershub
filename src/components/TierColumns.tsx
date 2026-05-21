@@ -319,14 +319,14 @@ onClick={() => {
   <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/10 via-red-500/10 to-transparent blur-3xl" />
 
   {/* SKIN */}
-<img
-  src={`https://mc-heads.net/body/${username}/right`}
+  <img
+  src={`https://visage.surgeplay.com/full/512/${skin}`}
   alt={username}
   onError={(e) => {
     (
       e.currentTarget as HTMLImageElement
     ).src =
-      "https://mc-heads.net/body/Steve/right";
+      "https://visage.surgeplay.com/full/512/Steve";
   }}
   className="
 relative
@@ -334,8 +334,8 @@ z-10
 w-full
 h-full
 object-contain
-scale-[2.3]
-translate-y-6
+scale-[1.6]
+translate-y-5
 "
 />
 
