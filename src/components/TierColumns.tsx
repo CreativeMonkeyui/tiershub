@@ -244,12 +244,66 @@ const skin =
     scale: 1.02,
     x: 4,
   }}
-  onClick={() =>
-    setSelectedPlayer({
-      ...player,
-      rank: i + 1,
+  onClick={() => {
+  const sortedPlayers = [...players]
+    .map((p) => {
+      const tierPoints: any = {
+        HT1: 60,
+        LT1: 45,
+        HT2: 30,
+        LT2: 20,
+        HT3: 10,
+        LT3: 6,
+        HT4: 4,
+        LT4: 3,
+        HT5: 2,
+        LT5: 1,
+      };
+
+      const points = Object.values(
+        p.tiers || {}
+      ).reduce(
+        (
+          total: number,
+          tier: any
+        ) =>
+          total +
+          (tierPoints[
+            String(tier).trim()
+          ] || 0),
+        0
+      );
+
+      return {
+        ...p,
+        points,
+      };
     })
-  }
+    .sort(
+      (a, b) =>
+        b.points - a.points
+    );
+
+  const realRank =
+    sortedPlayers.findIndex(
+      (p) =>
+        p.username ===
+        player.username
+    ) + 1;
+
+  const playerPoints =
+    sortedPlayers.find(
+      (p) =>
+        p.username ===
+        player.username
+    )?.points || 0;
+
+  setSelectedPlayer({
+    ...player,
+    rank: realRank,
+    points: playerPoints,
+  });
+}}
   className="group flex items-center justify-between rounded-2xl px-3 py-3 hover:bg-white/[0.03] transition-all duration-200 border border-transparent hover:border-white/5 cursor-pointer"
 >
 
