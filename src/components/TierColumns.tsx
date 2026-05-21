@@ -300,6 +300,8 @@ onClick={() => {
 
   setSelectedPlayer({
     ...player,
+    username,
+    skin: username,
     rank: realRank,
     points:
       fullPlayer?.points || 0,
